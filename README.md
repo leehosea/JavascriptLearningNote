@@ -1,5 +1,6 @@
 # Javascript学习笔记
 <img src="https://github.com/leehosea/JavascriptLearningNote/blob/master/javascript1600.png" width="100" height="100"/>
+
 ## Overview 概述
 这是我在学习Javascript时，边学边记下的一些要点，供参考、复习及速查使用，也希望能够帮助到您。
 我会不断完善这个文档，也希望您能提出宝贵意见。
