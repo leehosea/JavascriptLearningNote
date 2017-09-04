@@ -300,3 +300,87 @@ NaN有两个特点：
 >	        `var num6 = parseFloat('3.125e7');`  // 31250000
 
 #### 2.5 String类型
+字符串用单引号`'`或者双引号`"`包裹
+##### 2.5.1 字符字面量
+String数据类型包含一些特殊的的字符字面量，也称为`转义序列`或者`转义字符`。这些特殊字符用来表示非打印字符，或具有其它用途。见下表：
+
+字面量 | 含义
+--- | ---
+\n | 换行
+\t | 制表
+\b | 空格
+\r | 回车
+\f | 进纸
+\\ | 斜杠
+\' | 单引号`'`，'I\'m Hosea Lee.'
+\" | 双引号`"`，"I said: \"I'm Hosea Lee\""
+\xnn | 以十六进制码nn表示的一个字符，n为0～F，\x41表示A
+\unnnn | 以十六进制码nnnn表示的一个Unicode字符，n为0～F，\u03a3表示∑
+
+这些字符字面量可以出现在字符串任意位置，且在长度计算时占1个字符长度。
+
+##### 2.5.2 字符串的特点
+ECMAScript中的字符串是不可变的。也就是说，字符串只能创建或销毁。
+>	var lang = "Java";  
+>	lang = lang + "script";
+
+上面例子中，第一步声明变量lang并初始化赋值字符串"Java"，第二步，实现的过程是：首先创建一个10个字符的新字符串，然后在这个新字符串中填充"Javascript"，最后一步，销毁之前产生的"Java"和"script"，因为这两个字符串没有被任何变量引用。
+
+##### 2.5.3 转换为字符串
+要把一个值转换为一个字符串有两种方式。
+
+1.`toString()`  
+	这是一个几乎所有值都有的方法，后面会单独讨论，先来看几个例子：  
+>	var age = 11;  
+>	var age_str = age.toString();  //字符串"11"  
+>	var found = true;  
+>	var found_str = found.toString();  //字符串"true"  
+
+`数值、布尔值、对象和字符串值都有toString()方法，但null和undefined值没有。`  
+
+多数情况下，调用toString()方法不必传任何参数，但是在对数值类型变量调用该方法时，可以传递一个参数：**输出数值的基数。** 默认情况，toString()方法是用十进制格式返回数值的字符串表示。而通过传递基数，可以实现输出二进制、八进制、十进制、十六进制，甚至其它任意有效进制格式表示的字符串值，见下面例子：  
+ 
+>	var num = 10;  
+>	console.log(num.toString());  //"10"  
+>	console.log(num.toString(2));  //"1010"  
+>	console.log(num.toString(8));  //"12"  
+>	console.log(num.toString(10));  //"10"  
+>	console.log(num.toString(16));  //"a"
+
+2.`String()`  
+	在不知道待转换变量是不是null或undefined的情况下，可以使用`String()`，这个函数可以将任何类型的值转换为字符串。  
+	
+转换规则如下：  
+	
+* 如果值有toString()方法，调用该方法（无参）并返回结果
+* 如果值是null，返回"null"
+* 如果值是undefined，返回"undefined"
+
+看下面例子：  
+>	var value1 = 10;  
+>	var value2 = true;  
+>	var value3 = null;  
+>	var value4;  
+>	console.log(String(value1));  //"10"  
+>	console.log(String(value2));  //"true"  
+>	console.log(String(value3));  //"null"  
+>	console.log(String(value4));  //"undefined"
+
+#### 2.6 Object类型
+ECMAScript中的对象其实是一组数据和功能的组合。可以通过`new`操作符后跟要创建的对象类型名字来创刊对象。如：
+>	var o = new Object();		//括号可以省略，如果不需要给构造函数传递参数，但不推荐
+
+仅仅创建Object的实例并没有什么用处，在ECMAScript中，Object类型是所有它的实例的基类。  
+Object的每一个实例都具有下列属性he方法：
+
+*	Constructor:  保存用于创建当前对象的函数，对于上面的例子，构造函数（constructor）就是Object()。
+*	hasOwnProperty(propertyName): 用于检查给定的属性(propertyName)在当前实例中是否存在。
+*	isPrototypeOf(object): 用于检查传入的对象是否是另一个对象的原型。
+*	propertyIsEnmumerable(propertyName): 用于检查给定的属性是否能够使用for-in语句来枚举。
+*	toLocaleString(): 返回对象的字符串表示，该字符串与执行环境的地区对应。
+*	toString(): 返回对象的字符串表示。
+*	valueOf(): 返回对象的字符串、数值或布尔值的表示，通常与toString()的返回值相同
+
+由于Object是所有对象的基础，因此所有对象都具有上面这些基本的属性和方法。因为Object相对其它数据类型较复杂，我们后面再详细讲。
+
+
